@@ -1,4 +1,4 @@
-name: Waka Readme
+name: Update gist with WakaTime stats with customlization
 
 on:
   schedule:
@@ -6,11 +6,14 @@ on:
     - cron: '30 18 * * *'
   workflow_dispatch:
 jobs:
-  update-readme:
-    name: Update Readme with Metrics
+  update-gist:
     runs-on: ubuntu-latest
+    name: Update Readme with Metrics
     steps:
       - uses: anmol098/waka-readme-stats@master
-        with:
-          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+      - name: Update gist
+        uses: matchai/waka-box@master
+        env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIST_ID: 813c121301d1bac00df0108b0c43bd69
+          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
